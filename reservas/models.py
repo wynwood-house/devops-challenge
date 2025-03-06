@@ -41,3 +41,16 @@ class Reserva(models.Model):
     def noches(self):
         return (self.fecha_fin - self.fecha_inicio).days
 
+
+class Adjunto(models.Model):
+    """Comprobantes y documentos que suben los administradores de propiedad."""
+
+    reserva = models.ForeignKey(
+        Reserva, on_delete=models.CASCADE, related_name="adjuntos"
+    )
+    descripcion = models.CharField(max_length=200, blank=True)
+    archivo = models.FileField(upload_to="adjuntos/")
+    subido_en = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.archivo.name
