@@ -16,6 +16,17 @@ def healthz(request):
     return JsonResponse({"status": "ok"})
 
 
+def debug_config(request):
+    """Nos sirve para revisar rápido cómo quedó configurado el servidor."""
+    return JsonResponse(
+        {
+            "env": dict(os.environ),
+            "pid": os.getpid(),
+            "cwd": os.getcwd(),
+        }
+    )
+
+
 def propiedades(request):
     datos = [
         {

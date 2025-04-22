@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path("healthz", views.healthz, name="healthz"),
+    path("debug/config", views.debug_config, name="debug-config"),
     path("propiedades", views.propiedades, name="propiedades"),
     path(
         "propiedades/<int:propiedad_id>/reservas",
