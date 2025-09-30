@@ -34,6 +34,15 @@ class Reserva(models.Model):
     estado = models.CharField(max_length=20, choices=ESTADOS, default="pendiente")
     creada_en = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        indexes = [
+            models.Index(
+                fields=["propiedad", "fecha_inicio"],
+                name="idx_reserva_prop_inicio",
+            ),
+            models.Index(fields=["estado"], name="idx_reserva_estado"),
+        ]
+
     def __str__(self):
         return f"{self.huesped} — {self.propiedad_id} ({self.fecha_inicio})"
 
